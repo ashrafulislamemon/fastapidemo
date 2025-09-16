@@ -1,0 +1,101 @@
+uvicorn app.main:app --host 0.0.0.0 --port 9000 --reload
+
+
+1.alembic init alembic
+
+2.alembic.ini 
+
+sqlalchemy.url = mysql+pymysql://root:@localhost/test_db_test
+
+3.alembic .env
+
+****Import all models for Alembic to detect *****
+from app.database import Base
+
+target_metadata = Base.metadata
+
+
+
+4.alembic stamp head
+
+5.alembic revision --autogenerate -m "add new field"
+
+alembic upgrade head
+
+
+uvicorn app.main:app --host 0.0.0.0 --port 9000 --reload
+
+
+
+fastapi_project/
+│
+├── app/
+│   ├── main.py              # FastAPI entrypoint
+│   ├── database.py          # Database engine + SessionLocal + Base
+│   ├── core/                # (optional) settings, security, etc.
+│   │   └── config.py
+│   │
+│   ├── account/
+│   │   ├── models.py
+│   │   ├── schemas.py
+│   │   ├── crud.py
+│   │   └── router.py
+│   │
+│   ├── buy/
+│   │   ├── models.py
+│   │   ├── schemas.py
+│   │   ├── crud.py
+│   │   └── router.py
+│   │
+│   ├── sell/
+│   │   ├── models.py
+│   │   ├── schemas.py
+│   │   ├── crud.py
+│   │   └── router.py
+│   │
+│   └── tests/               # pytest tests
+│
+├── requirements.txt
+└── alembic/                 # migrations (if using Alembic)
+
+
+# Root folder বানান
+mkdir -p fastapi_project/app
+
+# main.py আর database.py
+touch fastapi_project/app/main.py
+touch fastapi_project/app/database.py
+
+# core folder + config.py
+mkdir -p fastapi_project/app/core
+touch fastapi_project/app/core/config.py
+
+# account module
+mkdir -p fastapi_project/app/account
+touch fastapi_project/app/account/models.py
+touch fastapi_project/app/account/schemas.py
+touch fastapi_project/app/account/crud.py
+touch fastapi_project/app/account/router.py
+
+# buy module
+mkdir -p fastapi_project/app/buy
+touch fastapi_project/app/buy/models.py
+touch fastapi_project/app/buy/schemas.py
+touch fastapi_project/app/buy/crud.py
+touch fastapi_project/app/buy/router.py
+
+# sell module
+mkdir -p fastapi_project/app/sell
+touch fastapi_project/app/sell/models.py
+touch fastapi_project/app/sell/schemas.py
+touch fastapi_project/app/sell/crud.py
+touch fastapi_project/app/sell/router.py
+
+# tests folder
+mkdir -p fastapi_project/app/tests
+
+# requirements.txt
+touch fastapi_project/requirements.txt
+
+# alembic folder
+mkdir -p fastapi_project/alembic
