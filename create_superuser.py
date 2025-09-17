@@ -22,7 +22,7 @@ def create_superuser():
         email=email,
         password=hash_password(password),
         birthdate=date.today(),
-        is_superuser=True
+        role=models.UserRole.superadmin
     )
     db.add(admin)
     db.commit()
